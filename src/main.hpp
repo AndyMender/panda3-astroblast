@@ -15,6 +15,7 @@
 namespace ab_main
 {
     /// Allowed command-line exit codes
+    // NOTE: 'unit8_t' is an alias for 'char'!
     enum class CmdlineCode: uint8_t
     {
         Success,
@@ -27,13 +28,13 @@ namespace ab_main
     {
         namespace po = boost::program_options;
 
-        uint8_t verbosity;
+        uint16_t verbosity = static_cast<std::uint16_t>(ab_common::Verbosity);
 
         // Declare the supported options.
         po::options_description desc("Allowed options");
         desc.add_options()
         ("help,h", "Print this help message")
-        ("verbosity,v", po::value<uint8_t>(), "Set verbosity level")
+        ("verbosity,v", po::value<uint16_t>(), "Set verbosity level")
         ;
 
         // Parse command-line arguments
@@ -59,7 +60,7 @@ namespace ab_main
 
         if (argumentMap.count("verbosity"))
         {
-            verbosity = argumentMap["verbosity"].as<uint8_t>();
+            verbosity = argumentMap["verbosity"].as<uint16_t>();
             ab_common::Verbosity = static_cast<ab_common::AppLogLevel>(verbosity);
 
             ab_common::log_message("Setting verbosity to: " + std::to_string(verbosity), ab_common::AppLogLevel::Info);

@@ -10,7 +10,7 @@
 namespace ab_common
 {
     /// Allowed verbosity levels
-    enum class AppLogLevel: std::uint8_t
+    enum class AppLogLevel: std::uint16_t
     { 
         Fatal,
         Warning, 
@@ -20,7 +20,7 @@ namespace ab_common
     };
 
     /// Default verbosity level
-    static AppLogLevel Verbosity = AppLogLevel::Error;
+    AppLogLevel Verbosity = AppLogLevel::Error;
 
     /// Print a logging message
     void log_message(const std::string_view message, const AppLogLevel level);

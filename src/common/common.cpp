@@ -6,7 +6,10 @@ namespace ab_common
 {
     void log_message(const std::string_view message, const AppLogLevel level)
     {
-        if (level > Verbosity) return;
+        const uint16_t level_int = static_cast<std::uint16_t>(level);
+        const uint16_t verbosity = static_cast<std::uint16_t>(Verbosity);
+
+        if (level_int > verbosity) return;
 
         // TODO: Make selector less repetitive?
         switch(level) {
@@ -26,8 +29,7 @@ namespace ab_common
                 BOOST_LOG_TRIVIAL(debug) << message;
                 break;
             default:
-                const uint8_t verbosity = static_cast<uint8_t>(level);
-                BOOST_LOG_TRIVIAL(fatal) << "Unsupported log level found: " << std::to_string(verbosity);
+                BOOST_LOG_TRIVIAL(fatal) << "Unsupported log level found: " << std::to_string(level_int);
         }
     }
 
