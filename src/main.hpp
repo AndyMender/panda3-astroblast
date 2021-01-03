@@ -60,9 +60,9 @@ namespace ab_main
 
         if (argumentMap.count("verbosity"))
         {
+            // TODO: Catch under/overflows cleanly?
             verbosity = argumentMap["verbosity"].as<uint16_t>();
             ab_common::Verbosity = static_cast<ab_common::AppLogLevel>(verbosity);
-
             ab_common::log_message("Setting verbosity to: " + std::to_string(verbosity), ab_common::AppLogLevel::Info);
         }
         else
