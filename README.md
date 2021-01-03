@@ -8,3 +8,6 @@ A re-imagining of the MS-DOS game Astro3D using the panda3d game engine.
 
 # Build instructions
 See the Travis CI YAML config.
+
+# Inspiration
+![MS-DOS Astro3D](astro3d_original.jpg)
