@@ -37,9 +37,18 @@ namespace ab_main
         ;
 
         // Parse command-line arguments
+        // NOTE: catch exception on failed parsing
         po::variables_map argumentMap;
-        po::store(po::parse_command_line(argc, argv, desc), argumentMap);
-        po::notify(argumentMap);    
+        try
+        {
+            po::store(po::parse_command_line(argc, argv, desc), argumentMap);
+            po::notify(argumentMap);
+        }
+        catch (po::invalid_command_line_syntax e)
+        {
+            ab_common::log_message("Failed to process command-line arguments. Use --help for possible options.", ab_common::AppLogLevel::Error);
+            return CmdlineCode::Error;
+        }
 
         // Handle argument values
         if (argumentMap.count("help"))
